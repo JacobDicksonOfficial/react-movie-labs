@@ -1,4 +1,4 @@
-# React Movie Labs
+# React - Movie Database Site
 
 <img src="movielab.png" alt="Logitrack" width="800"/>
 
