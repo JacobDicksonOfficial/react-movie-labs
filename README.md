@@ -1,6 +1,6 @@
 # React - Movie Database Site
 
-<img src="movielab.png" alt="Logitrack" width="800"/>
+<img src="movielab.png" alt="Logitrack" width="600"/>
 
 React Movie Labs is a movie application built using React, which allows users to view, filter, and explore movies using live data from The Movie Database (TMDB) API.
 
@@ -16,7 +16,10 @@ React Movie Labs is a movie application built using React, which allows users to
 
 ## Overview
 
-This project aims to provide a simple and clean interface for browsing movies. It uses live data from the TMDB API, which is displayed using various React components. The app also allows filtering based on movie genres, helping users find exactly what they’re looking for.
+This project aims to provide a simple and clean interface for browsing movies. It uses live data from the TMDB API, which is displayed using various React components. 
+The app also allows filtering based on movie genres, helping users find exactly what they’re looking for. React Movie Labs is a web application designed for browsing 
+and discovering movies using real-time data from The Movie Database (TMDB) API. The app allows users to explore a wide variety of movies, including popular, top-rated,
+and upcoming titles, displayed through dynamically generated movie cards. Users can filter movies by genres, providing an easy way to find films based on personal preferences. 
 
 ## Features
 
