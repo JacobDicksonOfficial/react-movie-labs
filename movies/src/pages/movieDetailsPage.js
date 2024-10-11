@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from "react";  // Import useState and useEffect
-import { useParams } from 'react-router-dom';  // Import useParams to get the movie ID
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import MovieHeader from "../components/headerMovie/";
 import MovieDetails from "../components/movieDetails/";
 import Grid from "@mui/material/Grid2";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
-const MoviePage = () => {  // Removed props as we are fetching data dynamically
-  const { id } = useParams();  // Extract the movie ID from the URL
-  const [movie, setMovie] = useState(null);  // State for movie details
-  const [images, setImages] = useState([]);  // State for movie images
+const MoviePage = () => {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [images, setImages] = useState([]);
 
-  // Fetch movie details when the component mounts or the ID changes
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
     )
       .then((res) => res.json())
       .then((movie) => {
-        // console.log(movie);  // For debugging
-        setMovie(movie);  // Set the movie details in state
+        setMovie(movie);
       });
   }, [id]);
 
-  // Fetch movie images when the component mounts
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
@@ -31,10 +28,8 @@ const MoviePage = () => {  // Removed props as we are fetching data dynamically
       .then((res) => res.json())
       .then((json) => json.posters)
       .then((images) => {
-        // console.log(images);  // For debugging
-        setImages(images);  // Set the images in state
+        setImages(images);
       });
-      // eslint-disable-next-line
   }, [id]);
 
   return (
@@ -51,7 +46,6 @@ const MoviePage = () => {  // Removed props as we are fetching data dynamically
                   justifyContent: "space-around",
                 }}
               >
-                {/* Updated ImageList */}
                 <ImageList
                   sx={{
                     height: "100vh",
