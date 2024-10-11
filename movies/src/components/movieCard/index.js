@@ -12,13 +12,35 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid2";
+import Avatar from '@mui/material/Avatar';  // Import Avatar for the favorite icon
 import img from '../../images/film-poster-placeholder.png';
 
 export default function MovieCard(props) {
   const movie = props.movie;
+
+  // Event handler for adding a movie to favorites
+  const handleAddToFavorite = (e) => {
+    e.preventDefault();
+    props.selectFavorite(movie.id);  // Calls the selectFavorite prop passed from the parent
+  };
+
   return (
     <Card>
-      <CardHeader title={movie.title} sx={{ textWrap: "nowrap"}}/>
+      {/* Display a red Avatar if the movie is marked as favorite */}
+      <CardHeader
+        avatar={
+          movie.favorite ? (
+            <Avatar sx={{ backgroundColor: 'red' }}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : null
+        }
+        title={
+          <Typography variant="h5" component="p">
+            {movie.title}{" "}
+          </Typography>
+        }
+      />
       <CardMedia
         sx={{ height: 500 }}
         image={
@@ -44,7 +66,8 @@ export default function MovieCard(props) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={null}>
+        {/* Favorite button */}
+        <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
 
