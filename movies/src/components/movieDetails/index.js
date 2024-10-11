@@ -42,7 +42,10 @@ const MovieDetails = ({ movie }) => {  // Destructure movie and useState for dra
           <li key={g.name}>
             <Chip label={g.name} sx={{ ...chip }} />
           </li>
+
+          
         ))}
+
       </Paper>
 
       <Paper component="ul" sx={{ ...root }}>
@@ -59,11 +62,14 @@ const MovieDetails = ({ movie }) => {  // Destructure movie and useState for dra
       </Paper>
 
       <Paper component="ul" sx={{ ...root }}>
-  <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
-  {movie.production_countries.map((country) => (
-    <Chip key={country.name} label={country.name} sx={{ ...chip }} />
-  ))}
-</Paper>
+         <Chip icon={<NavigationIcon />} label="Production Countries" sx={{ ...chip }} color="primary" />
+           {movie.production_countries.map((country) => (
+         <Chip key={country.name} label={country.name} sx={{ ...chip }} />
+        ))}
+      </Paper>
+
+
+      
 
 
 
