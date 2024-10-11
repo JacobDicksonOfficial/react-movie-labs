@@ -58,6 +58,15 @@ const MovieDetails = ({ movie }) => {  // Destructure movie and useState for dra
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
 
+      <Paper component="ul" sx={{ ...root }}>
+  <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
+  {movie.production_countries.map((country) => (
+    <Chip key={country.name} label={country.name} sx={{ ...chip }} />
+  ))}
+</Paper>
+
+
+
       {/* Fab button to open Drawer */}
       <Fab
         color="secondary"
