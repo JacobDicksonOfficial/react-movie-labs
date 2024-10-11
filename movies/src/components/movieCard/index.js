@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";  // Add this import for routing
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -11,7 +12,7 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid2";
-import img from '../../images/film-poster-placeholder.png'
+import img from '../../images/film-poster-placeholder.png';
 
 export default function MovieCard(props) {
   const movie = props.movie;
@@ -46,9 +47,14 @@ export default function MovieCard(props) {
         <IconButton aria-label="add to favorites" onClick={null}>
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
-        <Button variant="outlined" size="medium" color="primary">
-          More Info ...
-        </Button>
+
+        {/* Wrap the 'More Info' button in a Link */}
+        <Link to={`/movies/${movie.id}`}>
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
+        
       </CardActions>
     </Card>
   );
