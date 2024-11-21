@@ -26,10 +26,10 @@ const SiteHeader = ({ history }) => {
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
-    { label: "Option 3", path: "/" },
+    { label: "Upcoming", path: "/movies/upcoming" }, // New navigation item
     { label: "Option 4", path: "/" },
   ];
-
+  
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
   };

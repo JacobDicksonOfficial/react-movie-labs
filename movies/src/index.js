@@ -9,7 +9,8 @@ import SiteHeader from './components/siteHeader';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
-import AddMovieReviewPage from './pages/addMovieReviewPage'
+import AddMovieReviewPage from './pages/addMovieReviewPage';
+import UpcomingMoviesPage from './pages/upcomingMoviesPage'; // Import Upcoming Movies Page
 
 // Declare the query client to manage the cache
 const queryClient = new QueryClient({
@@ -35,7 +36,8 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
-            <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+            <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} /> {/* New route */}
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
