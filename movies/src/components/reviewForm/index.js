@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { MoviesContext } from "../../contexts/moviesContext";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useForm, Controller } from "react-hook-form";
+import Snackbar from "@mui/material/Snackbar"; // Import Snackbar
+import MuiAlert from "@mui/material/Alert"; // Import MuiAlert
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const ratings = [
   {
@@ -57,15 +61,18 @@ const styles = {
 };
 
 const ReviewForm = ({ movie }) => {
+  const context = useContext(MoviesContext); // Accessing the MoviesContext
   const [rating, setRating] = useState(3);
-  
+  const [open, setOpen] = useState(false); // State to manage Snackbar visibility
+  const navigate = useNavigate(); // Hook for navigation
+
   const defaultValues = {
     author: "",
     review: "",
     agree: false,
     rating: "3",
   };
-  
+
   const {
     control,
     formState: { errors },
@@ -77,14 +84,37 @@ const ReviewForm = ({ movie }) => {
     setRating(event.target.value);
   };
 
+  const handleSnackClose = (event) => {
+    setOpen(false);
+    navigate("/movies/favorites"); // Navigate to favorites page
+  };
+
   const onSubmit = (review) => {
     review.movieId = movie.id;
     review.rating = rating;
-    console.log(review);
+    context.addReview(movie, review); // Add the review to the context
+    setOpen(true); // Display Snackbar
   };
 
   return (
     <Box component="div" sx={styles.root}>
+      <Snackbar
+        sx={styles.snack}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={open}
+        onClose={handleSnackClose}
+      >
+        <MuiAlert
+          severity="success"
+          variant="filled"
+          onClose={handleSnackClose}
+        >
+          <Typography variant="h4">
+            Thank you for submitting a review
+          </Typography>
+        </MuiAlert>
+      </Snackbar>
+
       <Typography component="h2" variant="h3">
         Write a review
       </Typography>
