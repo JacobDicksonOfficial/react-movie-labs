@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";  // Import useState and useEffect as instructed
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -10,9 +10,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg';
-import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import Spinner from '../spinner';
+import { getGenres } from "../../api/tmdb-api";
+
 
 const formControl = {
   margin: 1,
@@ -21,7 +22,6 @@ const formControl = {
 };
 
 export default function FilterMoviesCard(props) {
-  // Replace the genres array with this state:
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
   if (isLoading) {
@@ -31,8 +31,9 @@ export default function FilterMoviesCard(props) {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
+
   const genres = data.genres;
-  if (genres[0].name !== "All"){
+  if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
 
@@ -41,7 +42,7 @@ export default function FilterMoviesCard(props) {
     props.onUserInput(type, value); // NEW
   };
 
-  const handleTextChange = (e, props) => {
+  const handleTextChange = (e) => {
     handleChange(e, "name", e.target.value);
   };
 
@@ -50,37 +51,36 @@ export default function FilterMoviesCard(props) {
   };
 
   return (
-    <Card 
+    <Card
       sx={{
         backgroundColor: "rgb(204, 204, 0)"
-      }} 
-      variant="outlined">
+      }}
+      variant="outlined"
+    >
       <CardContent>
         <Typography variant="h5" component="h1">
           <SearchIcon fontSize="large" />
           Filter the movies.
         </Typography>
-        
-        {/* Replace the TextField with the updated version */}
+
         <TextField
-          sx={{...formControl}}
+          sx={{ ...formControl }}
           id="filled-search"
           label="Search field"
           type="search"
           variant="filled"
-          value={props.titleFilter}  // Updated to use props.titleFilter
-          onChange={handleTextChange}  // Use the handleTextChange event handler
+          value={props.titleFilter} // Updated to use props.titleFilter
+          onChange={handleTextChange} // Use the handleTextChange event handler
         />
 
-        {/* Replace the Select component with the updated version */}
-        <FormControl sx={{...formControl}}>
+        <FormControl sx={{ ...formControl }}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
             labelId="genre-label"
             id="genre-select"
-            defaultValue=""  // Updated to default value
-            value={props.genreFilter}  // Updated to use props.genreFilter
-            onChange={handleGenreChange}  // Use the handleGenreChange event handler
+            defaultValue="" // Updated to default value
+            value={props.genreFilter} // Updated to use props.genreFilter
+            onChange={handleGenreChange} // Use the handleGenreChange event handler
           >
             {genres.map((genre) => (
               <MenuItem key={genre.id} value={genre.id}>
@@ -90,7 +90,7 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
       </CardContent>
-      
+
       <CardMedia
         sx={{ height: 300 }}
         image={img}
